@@ -12,18 +12,27 @@ class RoomController extends Controller{
     DB::beginTransaction(); 
     try{ 
         $this->validate($req,[
-            'customer_id' => 'required',
-            'room_id' => 'required',
+            'Customer_id' => 'required',
+            'Room_id' => 'required'
         ]);
-    
+        
+
+        $roomId = $req->input('Room_id');
         $transaction = new TransactionDetail;
         $transaction->Customer_id = $req->input('Customer_id');
-        $transaction->Room_id = $req->input('Room_id');
-        $transaction->TransactionDate = $req->input('TransactionDate');
+        $transaction->room_id = $roomId;
+        $transaction->TransactionDate = "";
         $transaction->price = "";
         $transaction->CheckInDate= "";
         $transaction->CheckOutDate= "";
-        $transaction->save();
+        $transaction->save(); 
+        
+        DB::table('rooms')       
+        ->where('id', $roomId)
+        ->update(['vacant' => false , 'occupied' => true]);
+
+        DB::commit();
+
 
         return response()->json(['message' => 'Succesfully Create Transaction Details'], 200);
     }

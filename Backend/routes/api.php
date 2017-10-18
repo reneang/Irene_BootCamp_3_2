@@ -18,5 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'transaction'], function() {
-    Route::post('/booking', 'RoomController@BookingTransaction');
+    Route::post('booking', 'RoomController@BookingTransaction');
 });
