@@ -8,7 +8,7 @@ use App\TransactionDetail;
 
 
 class RoomController extends Controller{
-    function Transaction(Request $req){
+    function BookingTransaction(Request $req){
     DB::beginTransaction(); 
     try{ 
         $this->validate($req,[
@@ -24,6 +24,7 @@ class RoomController extends Controller{
         $transaction->CheckInDate= "";
         $transaction->CheckOutDate= "";
         $transaction->save();
+
         return response()->json(['message' => 'Succesfully Create Transaction Details'], 200);
     }
     catch(\Exception $e){
