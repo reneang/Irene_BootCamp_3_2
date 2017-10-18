@@ -17,12 +17,12 @@ class RoomController extends Controller{
         ]);
     
         $transaction = new TransactionDetail;
-        $Customer_id->Customer_id = $req->input('Customer_id');
-        $Room_id->Room_id = $req->input('Room_id');
-        $TransactionDate->TransactionDate = $req->input('TransactionDate');
-        $price->price = "";
-        $CheckInDate->CheckInDate= "";
-        $CheckOutDate->CheckOutDate= "";
+        $transaction->Customer_id = $req->input('Customer_id');
+        $transaction->Room_id = $req->input('Room_id');
+        $transaction->TransactionDate = $req->input('TransactionDate');
+        $transaction->price = "";
+        $transaction->CheckInDate= "";
+        $transaction->CheckOutDate= "";
         $transaction->save();
         return response()->json(['message' => 'Succesfully Create Transaction Details'], 200);
     }
